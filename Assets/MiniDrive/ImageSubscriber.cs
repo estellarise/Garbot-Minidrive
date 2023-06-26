@@ -1,40 +1,38 @@
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Sensor;
+using UnityEngine.UI;
 
 /// <summary>
 /// Based on RosPublisherExample code from Unity ROS tutorials
 /// Publishes twist msg based on joystick toggle
 /// </summary>
-public class ImagePublisher: MonoBehaviour
+
+
+public class ImageSubscriber : MonoBehaviour
 {
-    ROSConnection ros;
-    public string topicName = "video";
-
-    // Publish the cube's position and rotation every N seconds
-    public float publishMessageFrequency = 0.5f;
-
-    // Used to determine how much time has elapsed since the last message was published
-    private float timeElapsed;
-
+    public Texture2D VideoTexture2D; 
+    public Image imageVideo;
     void Start()
-    {
-        // start the ROS connection
-        ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<CompressedImageMsg>(topicName);
+    { //move to update after testing
+        VideoTexture2D = new Texture2D(2,2);
+        print("hello");
     }
 
-    private void Update()
+    void Update()
     {
-        timeElapsed += Time.deltaTime;
-        if (timeElapsed > publishMessageFrequency)
-        {
-            CompressedImageMsg videoMsg = new CompressedImageMsg();
-
-            // Finally send the message to server_endpoint.py running in ROS
-            ros.Publish(topicName, videoMsg);
-
-            timeElapsed = 0;
-        }
+        ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>("esp32_img/compressed", ImageChange);
+    }
+    
+    void ImageChange(CompressedImageMsg imageMessage)
+    {
+        //imageVideo.image = ImageConversion.LoadImage(imageVideo, imageMessage.data);
+        // ImageConversion.LoadImage(VideoTexture2D, imageMessage.data);
+        print("reached");
+        VideoTexture2D.LoadImage(imageMessage.data);
+        Sprite newImage = Sprite.Create(VideoTexture2D, new Rect(2,2,2, 2), Vector2.zero);
+        imageVideo.sprite = newImage;
+        //GetComponent<Renderer>().material.mainTexture = VideoTexture2D;
+        //cube.GetComponent<Renderer>().material.color = new Color32((byte)colorMessage.r, (byte)colorMessage.g, (byte)colorMessage.b, (byte)colorMessage.a);
     }
 }
