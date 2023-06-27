@@ -14,21 +14,16 @@ public class ImageSubscriber : MonoBehaviour
     public Texture2D VideoTexture2D; 
     public Image imageVideo;
     void Start()
-    { //move to update after testing
-        VideoTexture2D = new Texture2D(2,2);
-        print("hello");
+    {
+        VideoTexture2D = new Texture2D(2, 2);
+        ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>("esp32_img/compressed", ImageChange); 
+            // moving to update freezes connection, subscriber inherently a loop, no need to loop it
     }
 
-    void Update()
-    {
-        ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>("esp32_img/compressed", ImageChange);
-    }
-    
     void ImageChange(CompressedImageMsg imageMessage)
     {
         //imageVideo.image = ImageConversion.LoadImage(imageVideo, imageMessage.data);
         // ImageConversion.LoadImage(VideoTexture2D, imageMessage.data);
-        print("reached");
         VideoTexture2D.LoadImage(imageMessage.data);
         Sprite newImage = Sprite.Create(VideoTexture2D, new Rect(2,2,2, 2), Vector2.zero);
         imageVideo.sprite = newImage;
