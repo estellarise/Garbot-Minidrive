@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Geometry;
+//using UnityEngine.UI;
 
 /// <summary>
 /// Based on RosPublisherExample code from Unity ROS tutorials
@@ -9,11 +10,13 @@ using RosMessageTypes.Geometry;
 public class JoystickTwistPublisher: MonoBehaviour
 {
     ROSConnection ros;
-    public string topicName = "cmd_vel";
+    //public RobotSelectionDropdown whichRobot;
+    [HideInInspector]
+    public string topicName; // can't initialize field here, must use start
     public Joystick joystickLeft;
     public Joystick joystickRight;
     
-    // Publish the cube's position and rotation every N seconds
+    // Publish every N seconds
     public float publishMessageFrequency = 0.5f;
 
     // Used to determine how much time has elapsed since the last message was published
@@ -22,6 +25,7 @@ public class JoystickTwistPublisher: MonoBehaviour
     void Start()
     {
         // start the ROS connection
+        topicName = "bot_1/cmd_vel";
         ros = ROSConnection.GetOrCreateInstance();
         ros.RegisterPublisher<TwistMsg>(topicName);
     }

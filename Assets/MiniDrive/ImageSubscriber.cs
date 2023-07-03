@@ -1,7 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Sensor;
-using UnityEngine.UI;
 
 /// <summary>
 /// Based on RosPublisherExample code from Unity ROS tutorials
