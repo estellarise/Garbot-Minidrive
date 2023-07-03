@@ -22,6 +22,13 @@ public class ImageSubscriber : MonoBehaviour
         // moving to update freezes connection, subscriber inherently a loop, no need to loop it
     }
 
+    /*
+    void Update()
+    {
+        
+    }
+    */
+
     void ImageChange(CompressedImageMsg imageMessage)
     {
         //print(imageMessage.header);

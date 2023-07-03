@@ -1,7 +1,6 @@
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Geometry;
-//using UnityEngine.UI;
 
 /// <summary>
 /// Based on RosPublisherExample code from Unity ROS tutorials
@@ -11,10 +10,12 @@ public class JoystickTwistPublisher: MonoBehaviour
 {
     ROSConnection ros;
     //public RobotSelectionDropdown whichRobot;
-    [HideInInspector]
+    [HideInInspector] // hide b/c inspector makes its field content fixed (can't change)
     public string topicName; // can't initialize field here, must use start
     public Joystick joystickLeft;
     public Joystick joystickRight;
+    public TestDropdown dropdown;
+    private int numberOfRobots = 3; // change according to how many actual robots there are
     
     // Publish every N seconds
     public float publishMessageFrequency = 0.5f;
@@ -22,16 +23,26 @@ public class JoystickTwistPublisher: MonoBehaviour
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
 
-    void Start()
+    void Start() 
     {
         // start the ROS connection
-        topicName = "bot_1/cmd_vel";
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<TwistMsg>(topicName);
+        // register (fixed) X robots beforehand 
+        for (int i = 1; i < numberOfRobots + 1; i++)
+        {
+            topicName = "/bot_" + i.ToString() + "/cmd_vel";
+            ros.RegisterPublisher<TwistMsg>(topicName);
+            print("Registered: "+ topicName);
+        }
     }
 
     private void Update()
     {
+        Publish();
+    }
+    private void Publish()
+    {
+        topicName = "/" + dropdown.currentRobot + "/cmd_vel";
         timeElapsed += Time.deltaTime;
         if (timeElapsed > publishMessageFrequency)
         {
@@ -47,3 +58,5 @@ public class JoystickTwistPublisher: MonoBehaviour
         }
     }
 }
+
+
