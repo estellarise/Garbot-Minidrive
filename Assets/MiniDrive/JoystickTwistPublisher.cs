@@ -15,7 +15,7 @@ public class JoystickTwistPublisher: MonoBehaviour
     public Joystick joystickLeft;
     public Joystick joystickRight;
     public TestDropdown dropdown;
-    private int numberOfRobots = 3; // change according to how many actual robots there are
+    public int numberOfRobots = 3; // change according to how many actual robots there are
     
     // Publish every N seconds
     public float publishMessageFrequency = 0.5f;

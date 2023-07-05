@@ -9,6 +9,7 @@ public class TestDropdown : MonoBehaviour
     Dropdown m_Dropdown;
     //public Text m_Text;
     public string currentRobot = "bot_1";
+    public bool hasChanged = false;
 
     void Start()
     {
@@ -27,5 +28,6 @@ public class TestDropdown : MonoBehaviour
     {
         m_Dropdown = change.GetComponent<Dropdown>();
         currentRobot = m_Dropdown.options[m_Dropdown.value].text;
+        hasChanged = true;
     }
 }
