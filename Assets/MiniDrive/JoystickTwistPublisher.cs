@@ -4,14 +4,16 @@ using RosMessageTypes.Geometry;
 
 /// <summary>
 /// Based on RosPublisherExample code from Unity ROS tutorials
-/// Publishes twist msg based on joystick toggle
+/// https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md
+/// 
+/// Publishes Twist message based on joystick toggle
 /// </summary>
 public class JoystickTwistPublisher: MonoBehaviour
 {
     ROSConnection ros;
     //public RobotSelectionDropdown whichRobot;
     [HideInInspector] // hide b/c inspector makes its field content fixed (can't change)
-    public string topicName; // can't initialize field here, must use start
+    public string topicName;
     public Joystick joystickLeft;
     public Joystick joystickRight;
     public TestDropdown dropdown;
@@ -27,7 +29,7 @@ public class JoystickTwistPublisher: MonoBehaviour
     {
         // start the ROS connection
         ros = ROSConnection.GetOrCreateInstance();
-        // register (fixed) X robots beforehand 
+        // register (fixed) number X robots beforehand 
         for (int i = 1; i < numberOfRobots + 1; i++)
         {
             topicName = "/bot_" + i.ToString() + "/cmd_vel";

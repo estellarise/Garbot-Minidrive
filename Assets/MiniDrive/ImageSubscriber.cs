@@ -4,8 +4,11 @@ using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Sensor;
 
 /// <summary>
-/// Based on RosPublisherExample code from Unity ROS tutorials
-/// Publishes twist msg based on joystick toggle
+/// Based on RosSubscriberExample code from Unity ROS tutorials
+/// https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/subscriber.md
+/// 
+/// Listens for compressed image msg from ESP-32 camera to emulate
+/// a video feed
 /// </summary>
 
 
@@ -24,7 +27,7 @@ public class ImageSubscriber : MonoBehaviour
     void Start()
     {
         VideoTexture2D = new Texture2D(espCamWidth, espCamHeight);
-        topicName = "/bot_1" + "/esp32_img/compressed";
+        topicName = "/bot_1/esp32_img/compressed";
         ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(topicName, ImageChange);
         // moving to update freezes connection, subscriber inherently a loop, no need to loop it
         
@@ -34,10 +37,7 @@ public class ImageSubscriber : MonoBehaviour
     {
         if (Dropdown.hasChanged)
         {
-            //print("hello");
             newTopicName = Dropdown.currentRobot + "/esp32_img/compressed";
-            //print(newTopicName);
-            //print(topicName);
             ros.Unsubscribe(topicName);
             ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(newTopicName, ImageChange);
             topicName = newTopicName;
