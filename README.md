@@ -2,23 +2,21 @@
 This repository contains a Unity Project that serves as a User Interface to move a mini robot and see from the robot's perspective via video. It does so by 
 publishing Twist messages and listening to compressed images from an ESP32.
 
-It does not include ESP32 code setup.
-<br>(Currently have not tested switching between multiple video feeds.)
+The repo does not include ESP32 code setup.
 
 ## Setup
 - Requirements / What this works on (you're welcome to try other setups, I only know that this one works)
   - Ubuntu 22.04
   - [ROS 2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html): Do all instructions up to and including ```sudo apt install ros-humble-desktop```
-  - [Unity 2020.3.45f1](https://stackoverflow.com/questions/73378850/how-can-i-install-unity-hub-on-ubuntu-22-04): Use first answer
+  - [Unity 2020.3.45f1](https://stackoverflow.com/questions/73378850/how-can-i-install-unity-hub-on-ubuntu-22-04): Use link if installing Unity on Ubuntu, use first answer
   
 - Components
   - Software
-    - Clone this project :) {Make script to automate even further}
-    - [Unity-ROS Bridge Github](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/README.md)
-    - [Unity-ROS TCP](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Visualizations.md)
-    - [Unity Joystick Pack](https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631): 
-      - Add to Package Manager {add screenshots on how to do this in Unity}
-    - [MicroROS Humble](https://github.com/micro-ROS/micro_ros_setup/tree/humble#quick-start): Follow "Building", skip anything with "firmware"
+    - Clone this project into its own folder :)
+    - [Unity-ROS Bridge Github](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/README.md): Clone into the same folder
+    - [Unity-ROS TCP Visualization](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Visualizations.md): Add to Unity package manager {add screenshots on how to do this in Unity}
+    - [Unity Joystick Pack](https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631): Add to Unity Package Manager (see above)
+    - [MicroROS Humble](https://github.com/micro-ROS/micro_ros_setup/tree/humble#quick-start): Follow "Building", skip any section headers with "firmware"
       
   - Hardware (Incomplete List)
     - ESP32-CAM + Power Supply
@@ -32,20 +30,38 @@ It does not include ESP32 code setup.
 
 ## Run
 - MicroROS
-  - Follow "Building micro-ROS-Agent"
-  - Replace the last command with
-         ```ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888```
+  - Code from "Building micro-ROS-Agent" of the MicroROS package (see above):
+  ```
+  ros2 run micro_ros_setup create_agent_ws.sh
+  ros2 run micro_ros_setup build_agent.sh
+  source install/local_setup.sh
+  ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
+  ```
+
 - Unity ROS Bridge
   ```
     source /opt/ros/humble/setup.bash
     source install/setup.bash
     hostname -I
   ```
-    Check IP, starts w/ 192.168.x.xxx {replace w/ env var's later?}
+    Replace ROS_IP below w/ the local IP of the host machine, starts w/ 192.168.x.xxx
   ```
-  ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=192.168.<x.xx> -p ROS_TCP_PORT:=11311
+  ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=192.168.<x.xxx> -p ROS_TCP_PORT:=11311
   ```
 - Unity: open Project and press the play button
 - Power on ESP32
 - You should see live video feed from the camera and be able to use the joysticks to control the motors :)
   
+## Notes
+- Future Directions
+  - Two devices publishing twists to the same robot crashes host. Implement a lock to ensure only one set of cameras and motors are connected to one device at a time.
+- Overarching structure
+  - use the same wifi, or else ROS and Unity cannot see each other
+  - ensure no docker containers are using the port for ROS
+  - can add source /opt/... to bashrc file to circumvent the need for that step.
+- ROS
+  - once one type of msg publishes to a topic, the topic will always expect that type of msg
+  - Cmake, msgs and topics: need to be declared in both Ros AND Unity
+    - suggestion to enable the above: make Github and clone once to each object
+- Unity-ROS
+  - [Tutorials starting point](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/README.md)
