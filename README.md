@@ -14,8 +14,8 @@ The repo does not include ESP32 code setup.
   - Software
     - Clone this project into its own folder :)
     - [Unity-ROS Bridge Github](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/README.md): Clone into the same folder
-    - [Unity-ROS TCP Visualization](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Visualizations.md): Add to Unity package manager {add screenshots on how to do this in Unity}
-    - [Unity Joystick Pack](https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631): Add to Unity Package Manager (see above)
+    - [Unity-ROS TCP Visualization](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Visualizations.md): Add to Unity package manager (see Notes for instructions)
+    - [Unity Joystick Pack](https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631): Add to Unity Package Manager (See Notes for guidance)
     - [MicroROS Humble](https://github.com/micro-ROS/micro_ros_setup/tree/humble#quick-start): Follow "Building", skip any section headers with "firmware"
       
   - Hardware (Incomplete List)
@@ -65,3 +65,7 @@ The repo does not include ESP32 code setup.
     - suggestion to enable the above: make Github and clone once to each object
 - Unity-ROS
   - [Tutorials starting point](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/README.md)
+- Unity
+  - Package Manager via Git URL: Window -> Package Manager -> Follow these [official instructions](https://docs.unity3d.com/2020.3/Documentation/Manual/upm-ui-giturl.html)
+  - Assets: Window -> Package Manager -> Packages: My Assets
+    - add them externally first via link
