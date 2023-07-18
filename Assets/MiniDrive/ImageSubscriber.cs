@@ -12,6 +12,7 @@ using RosMessageTypes.Sensor;
 
 public class ImageSubscriber : MonoBehaviour
 {
+    [HideInInspector]
     public Texture2D VideoTexture2D; 
     public Image imageVideo; // Image object where we place the "video" on
     private int espCamWidth = 320;
@@ -24,7 +25,8 @@ public class ImageSubscriber : MonoBehaviour
     {
         VideoTexture2D = new Texture2D(espCamWidth, espCamHeight);
         topicName = "/bot_1/esp32_img/compressed";
-        ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(topicName, ImageChange);
+        ros = ROSConnection.GetOrCreateInstance();
+        ros.Subscribe<CompressedImageMsg>(topicName, ImageChange);
     }
     
     void Update()
@@ -33,7 +35,7 @@ public class ImageSubscriber : MonoBehaviour
         {
             newTopicName = robotDropdown.currentRobot + "/esp32_img/compressed";
             ros.Unsubscribe(topicName);
-            ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(newTopicName, ImageChange);
+            ros.Subscribe<CompressedImageMsg>(newTopicName, ImageChange);
             topicName = newTopicName;
             robotDropdown.hasChanged = false;
         }
