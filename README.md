@@ -13,7 +13,7 @@ The repo does not include ESP32 code setup.
 - Components
   - Software
     - Clone this project into its own folder :)
-    - [Unity-ROS Bridge Github](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/README.md): Clone into the same folder
+    - [Unity-ROS Bridge Github](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/README.md): Clone into the same folder, follow [Setup](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/setup.md)
     - [Unity-ROS TCP Visualization](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Visualizations.md): Add to Unity package manager (see Notes for instructions)
     - [Unity Joystick Pack](https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631): Add to Unity Package Manager (See Notes for guidance)
     - [MicroROS Humble](https://github.com/micro-ROS/micro_ros_setup/tree/humble#quick-start): Follow "Building", skip any section headers with "firmware"
