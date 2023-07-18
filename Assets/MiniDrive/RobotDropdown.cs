@@ -4,10 +4,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestDropdown : MonoBehaviour
+public class RobotDropdown : MonoBehaviour
 {
     Dropdown m_Dropdown;
-    //public Text m_Text;
     public string currentRobot = "bot_1";
     public bool hasChanged = false;
 
@@ -23,7 +22,7 @@ public class TestDropdown : MonoBehaviour
         currentRobot = m_Dropdown.options[m_Dropdown.value].text; // needed for initialization in joyTwistPub and ImageSub
     }
 
-    //Output the new value of the Dropdown into Text
+    //Update current robot field when value of Dropdown changes
     void DropdownValueChanged(Dropdown change)
     {
         m_Dropdown = change.GetComponent<Dropdown>();

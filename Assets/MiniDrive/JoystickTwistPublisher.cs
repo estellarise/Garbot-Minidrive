@@ -15,7 +15,7 @@ public class JoystickTwistPublisher: MonoBehaviour
     public string topicName;
     public Joystick joystickLeft;
     public Joystick joystickRight;
-    public TestDropdown dropdown;
+    public RobotDropdown dropdown;
     public int numberOfRobots = 3; // change according to how many actual robots there are
     
     // Publish every N seconds
