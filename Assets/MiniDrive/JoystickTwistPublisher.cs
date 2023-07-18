@@ -11,8 +11,7 @@ using RosMessageTypes.Geometry;
 public class JoystickTwistPublisher: MonoBehaviour
 {
     ROSConnection ros;
-    //public RobotSelectionDropdown whichRobot;
-    [HideInInspector] // hide b/c inspector makes its field content fixed (can't change)
+    [HideInInspector] // hide b/c inspector makes its field content fixed (unable to change)
     public string topicName;
     public Joystick joystickLeft;
     public Joystick joystickRight;

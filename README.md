@@ -69,3 +69,4 @@ The repo does not include ESP32 code setup.
   - Package Manager via Git URL: Window -> Package Manager -> Follow these [official instructions](https://docs.unity3d.com/2020.3/Documentation/Manual/upm-ui-giturl.html)
   - Assets: Window -> Package Manager -> Packages: My Assets
     - add them externally first via link
+    - import, should be ready for use after

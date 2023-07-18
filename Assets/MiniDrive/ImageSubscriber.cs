@@ -16,12 +16,12 @@ public class ImageSubscriber : MonoBehaviour
 {
     // [HideInInspector]
     public Texture2D VideoTexture2D; 
-    public Image imageVideo;
+    public Image imageVideo; // Image object where we place the "video" on
     private int espCamWidth = 320;
     private int espCamHeight = 240;
     public TestDropdown Dropdown;
     //private ROSConnection ros = new ROSConnection();
-    public ROSConnection ros;
+    public ROSConnection ros; // needed, add prefab, else object reference is empty
     public string topicName;
     private string newTopicName;
     void Start()
@@ -45,9 +45,10 @@ public class ImageSubscriber : MonoBehaviour
         }
     }
 
+    /* Image object on Unity screen. Place sprite on image, update constantly */
     void ImageChange(CompressedImageMsg imageMessage)
     {
-        VideoTexture2D.LoadImage(imageMessage.data);
+        VideoTexture2D.LoadImage(imageMessage.data); // load compressed image onto 2D Texture
         Sprite newImage = Sprite.Create(VideoTexture2D, new Rect(0,0,espCamWidth, espCamHeight), Vector2.zero);
         imageVideo.sprite = newImage;
     }
