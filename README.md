@@ -55,6 +55,8 @@ The repo does not include ESP32 code setup.
 ## Notes
 - Future Directions
   - Two devices publishing twists to the same robot crashes host. Implement a lock to ensure only one set of cameras and motors are connected to one device at a time.
+  - Left-dominant mode
+  - Allow user to input IP for ROS Connection (similar to Robotics Window, but don't need to re-build project every time remote host changes)
 - Overarching structure
   - use the same wifi, or else ROS and Unity cannot see each other
   - ensure no docker containers are using the port for ROS

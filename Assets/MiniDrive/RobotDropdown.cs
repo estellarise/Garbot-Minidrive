@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class RobotDropdown : MonoBehaviour
 {
     Dropdown m_Dropdown;
-    public string currentRobot = "bot_1";
+    public string currentRobot;
     public bool hasChanged = false;
 
     void Start()

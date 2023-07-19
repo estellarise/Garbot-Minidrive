@@ -1695,7 +1695,6 @@ GameObject:
   - component: {fileID: 1141688965}
   - component: {fileID: 1141688964}
   - component: {fileID: 1141688963}
-  - component: {fileID: 1141688967}
   - component: {fileID: 1141688966}
   m_Layer: 5
   m_Name: Dropdown
@@ -1837,21 +1836,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bc807145434b81b62ee5f7c3c2d461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRobot: bot_1
+  currentRobot: 
   hasChanged: 0
---- !u!114 &1141688967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141688961}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cf7212d0245420eaa3d0a1f62d3cf88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  joyTwistPublisher: {fileID: 0}
 --- !u!1 &1274192535
 GameObject:
   m_ObjectHideFlags: 0
