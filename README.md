@@ -72,3 +72,4 @@ The repo does not include ESP32 code setup.
   - Assets: Window -> Package Manager -> Packages: My Assets
     - add them externally first via link
     - import, should be ready for use after
+  - Input fields are "sticky", they retain input if you manually give input (whether through script or via Unity editor)
