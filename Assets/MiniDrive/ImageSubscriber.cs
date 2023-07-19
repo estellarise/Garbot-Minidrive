@@ -24,7 +24,7 @@ public class ImageSubscriber : MonoBehaviour
     void Start()
     {
         VideoTexture2D = new Texture2D(espCamWidth, espCamHeight);
-        topicName = "/bot_1/esp32_img/compressed";
+        topicName = robotDropdown.currentRobot + "/esp32_img/compressed";
         ros = ROSConnection.GetOrCreateInstance();
         ros.Subscribe<CompressedImageMsg>(topicName, ImageChange);
     }
