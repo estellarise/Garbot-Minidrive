@@ -12,7 +12,7 @@ public class JoystickTwistPublisher: MonoBehaviour
 {
     ROSConnection ros;
     [HideInInspector] // hide b/c inspector makes its field content fixed (unable to change)
-    public string topicName;
+    public string topicName = "";
     public Joystick joystickLeft;
     public Joystick joystickRight;
     public RobotDropdown dropdown;
@@ -39,7 +39,10 @@ public class JoystickTwistPublisher: MonoBehaviour
 
     private void Update()
     {
-        Publish();
+        if (!dropdown.currentRobot.Equals("")) // if current robot in dropdown is not blank
+        {
+            Publish();
+        }
     }
     private void Publish()
     {

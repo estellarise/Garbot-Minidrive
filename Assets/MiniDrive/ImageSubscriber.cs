@@ -19,14 +19,12 @@ public class ImageSubscriber : MonoBehaviour
     private int espCamHeight = 240;
     public RobotDropdown robotDropdown;
     public ROSConnection ros; // needed, add prefab, else object reference is empty
-    public string topicName;
+    public string topicName = "";
     private string newTopicName;
     void Start()
     {
         VideoTexture2D = new Texture2D(espCamWidth, espCamHeight);
-        topicName = robotDropdown.currentRobot + "/esp32_img/compressed";
         ros = ROSConnection.GetOrCreateInstance();
-        ros.Subscribe<CompressedImageMsg>(topicName, ImageChange);
     }
     
     void Update()
@@ -34,7 +32,10 @@ public class ImageSubscriber : MonoBehaviour
         if (robotDropdown.hasChanged)
         {
             newTopicName = robotDropdown.currentRobot + "/esp32_img/compressed";
-            ros.Unsubscribe(topicName);
+            if (topicName != "")
+            {
+                ros.Unsubscribe(topicName);
+            }
             ros.Subscribe<CompressedImageMsg>(newTopicName, ImageChange);
             topicName = newTopicName;
             robotDropdown.hasChanged = false;

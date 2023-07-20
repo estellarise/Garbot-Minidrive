@@ -36,7 +36,10 @@ namespace MiniDrive
         
             private void Update()
             {
-                Publish();
+                if (!dropdown.currentRobot.Equals(""))
+                {
+                    Publish();
+                }
             }
             private void Publish()
             {
