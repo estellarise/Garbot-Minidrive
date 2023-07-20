@@ -53,6 +53,7 @@ The repo does not include ESP32 code setup.
 - You should see live video feed from the camera and be able to use the joysticks to control the motors :)
   
 ## Notes
+- To specify the number of robots beforehand, change number of robots in joystick [twist/point] corresponding field.
 - Future Directions
   - Two devices publishing twists to the same robot crashes host. Implement a lock to ensure only one set of cameras and motors are connected to one device at a time.
   - Left-dominant mode
