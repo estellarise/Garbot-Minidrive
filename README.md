@@ -52,6 +52,15 @@ The repo does not include ESP32 code setup.
 - Power on ESP32
 - You should see live video feed from the camera and be able to use the joysticks to control the motors :)
   
+## Configurations
+- Specify number of robots in JoystickPointPublisher.cs and JoystickTwistPublisher.cs
+- Naming Conventions:
+
+  | Interface    | Image Subscriber                  | Twist/Point Publisher             |
+  |--------------|-----------------------------------|-----------------------------------|
+  | Minibot      | /person_bot_1/esp32_img/compressed| /person_bot_1/cmd_vel             |
+  | MiniTrashBot | /bot_1/esp32_img/compressed       | /bot_1/cmd_vel                    |
+
 ## Notes
 - To specify the number of robots beforehand, change number of robots in joystick [twist/point] corresponding field.
 - Future Directions
@@ -59,6 +68,7 @@ The repo does not include ESP32 code setup.
   - Left-dominant mode
   - Allow user to input IP for ROS Connection (similar to Robotics Window, but don't need to re-build project every time remote host changes)
   - Script dropdown so adding robots is automated (currently have to manually add options to Unity dropdown)
+  - Attach twist publisher to point publisher to make only one variable control # of robots
 - Overarching structure
   - use the same wifi, or else ROS and Unity cannot see each other
   - ensure no docker containers are using the port for ROS
@@ -74,4 +84,5 @@ The repo does not include ESP32 code setup.
   - Assets: Window -> Package Manager -> Packages: My Assets
     - add them externally first via link
     - import, should be ready for use after
+  - Enable "USB Debugging Mode" after enabling developer mode to install interface
   - Input fields are "sticky", they retain input if you manually give input (whether through script or via Unity editor)
