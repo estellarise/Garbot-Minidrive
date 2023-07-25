@@ -27,6 +27,7 @@ The repo does not include ESP32 code setup.
 
 - Helpful Links
   - [Build setup from Unity to Android](https://www.youtube.com/watch?v=Nb62z3J4A_A)
+    - Build one scene at a time depending on which interface is needed. Dark blue is trash robot, cyan is person robot.
 
 ## Run
 - MicroROS
@@ -69,6 +70,7 @@ The repo does not include ESP32 code setup.
   - Allow user to input IP for ROS Connection (similar to Robotics Window, but don't need to re-build project every time remote host changes)
   - Script dropdown so adding robots is automated (currently have to manually add options to Unity dropdown)
   - Attach twist publisher to point publisher to make only one variable control # of robots
+  - Make a button that toggles b/w person mode and trash bot mode
 - Overarching structure
   - use the same wifi, or else ROS and Unity cannot see each other
   - ensure no docker containers are using the port for ROS
