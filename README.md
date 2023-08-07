@@ -30,28 +30,36 @@ The repo does not include ESP32 code setup.
     - Build one scene at a time depending on which interface is needed. Dark blue is trash robot, cyan is person robot.
 
 ## Run
-- MicroROS
-  - Code from "Building micro-ROS-Agent" of the MicroROS package (see above):
-  ```
-  ros2 run micro_ros_setup create_agent_ws.sh
-  ros2 run micro_ros_setup build_agent.sh
-  source install/local_setup.sh
-  ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
-  ```
+- In Terminal
+  - Open a window for MicroROS
+    - Code from "Building micro-ROS-Agent" of the MicroROS package (see above):
+    ```
+    ros2 run micro_ros_setup create_agent_ws.sh
+    ros2 run micro_ros_setup build_agent.sh
+    source install/local_setup.sh
+    ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
+    ```
 
-- Unity ROS Bridge
-  ```
-    source /opt/ros/humble/setup.bash
-    source install/setup.bash
-    hostname -I
-  ```
-    Replace ROS_IP below w/ the local IP of the host machine, starts w/ 192.168.x.xxx
-  ```
-  ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=192.168.<x.xxx> -p ROS_TCP_PORT:=11311
-  ```
-- Unity: open Project and press the play button
-- Power on ESP32
-- You should see live video feed from the camera and be able to use the joysticks to control the motors :)
+  - Open a window for ROS2
+    ```
+      source /opt/ros/humble/setup.bash
+      source install/setup.bash
+      hostname -I
+    ```
+      Replace ROS_IP below w/ the local IP of the host machine, starts w/ 192.168.x.xxx
+    ```
+    ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=192.168.<x.xxx> -p ROS_TCP_PORT:=11311
+    ```
+- In Unity 
+  - open Project and press the play button
+  - In the Heads-Up Display (HUD) located in the top left corner, change the left field's IP to the same
+  IP as found above, following pattern 192.168.x.xxx . 11311 is the default port for ROS, only change if 
+  you specified it differently manually.
+  
+- In the real world
+  - Power on the ESP32
+
+You should see live video feed from the camera and be able to use the joysticks to control the motors :)
   
 ## Configurations
 - Specify number of robots in JoystickPointPublisher.cs and JoystickTwistPublisher.cs
@@ -67,7 +75,6 @@ The repo does not include ESP32 code setup.
 - Future Directions
   - Two devices publishing twists to the same robot crashes host. Implement a lock to ensure only one set of cameras and motors are connected to one device at a time.
   - Left-dominant mode
-  - Allow user to input IP for ROS Connection (similar to Robotics Window, but don't need to re-build project every time remote host changes)
   - Script dropdown so adding robots is automated (currently have to manually add options to Unity dropdown)
   - Attach twist publisher to point publisher to make only one variable control # of robots
   - Make a button that toggles b/w person mode and trash bot mode
